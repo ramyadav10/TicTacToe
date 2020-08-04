@@ -256,8 +256,6 @@ chooseSymbol
 for (( noOfTurn=0; noOfTurn < 9 ; noOfTurn++ ))
 do
    playMove
-
-
    if [ $winner == 1 ]
    then
       echo "Winner is ${player[playerChange]}"
@@ -272,4 +270,3 @@ do
    fi
 	playChance=$(( $playChance % 2 ))
 done
-
