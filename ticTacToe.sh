@@ -79,10 +79,24 @@ TicTacToeApp(){
    fi
 }
 
-#Function for computer move with winning position
+#Function for computer move to find Winning and Blocking position
 superComputer(){
    currentSym=$sym
    winningOrBlockingMoveForSuperComputer
+
+   if [ $positionToPlay == -1 ]
+   then
+
+      if [ $currentSym == "X" ]
+      then
+         currentSym="O"
+      else
+         currentSym="X"
+      fi
+
+      winningOrBlockingMoveForSuperComputer
+   fi
+
 }
 
 #Function to check winning position for computer move
