@@ -92,7 +92,7 @@ superComputer(){
    done
 }
 
-#Function to start game
+#Function to start game 
 playMove(){
    playerChange=$playChance
    if [ ${player[$playChance]} == "computer" ]
@@ -106,10 +106,10 @@ playMove(){
       read -p "Please select a postion to play(1-9)" positionToPlay
    fi
 
-board[ $positionToPlay - 1 ]=$sym
-TicTacToeApp
-winner=$gamestatus
-playChance=$(( $playChance + 1 ))
+	board[ $positionToPlay - 1 ]=$sym
+	TicTacToeApp
+	winner=$gamestatus
+	playChance=$(( $playChance + 1 ))
 }
 
 #Initialising the variables
