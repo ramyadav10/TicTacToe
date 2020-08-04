@@ -101,6 +101,12 @@ superComputer(){
    then
       playOnCornerBySuperComputer
    fi
+
+#Condition for Selecting center position by computer
+   if [ $positionToPlay == -1 ]
+   then
+      positionToPlay=5
+   fi
 }
 
 #Function to check winning position for computer move
