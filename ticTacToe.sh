@@ -107,6 +107,11 @@ superComputer(){
    then
       positionToPlay=5
    fi
+
+   if [ $positionToPlay == -1 ]
+   then
+      playOnSideBySuperComputer
+   fi
 }
 
 #Function to check winning position for computer move
@@ -202,6 +207,24 @@ playOnCornerBySuperComputer(){
    elif [ ${board[8]} == "9" ]
    then
       positionToPlay=9
+   fi
+}
+
+#Function to select the Onside position by computer
+playOnSideBySuperComputer(){
+   positionToPlay=-1
+   if [ ${board[1]} == "2" ]
+   then
+      positionToPlay=2
+   elif ${board[3]} == "4" ]
+   then
+      positionToPlay=4
+   elif ${board[5]} == "6" ]
+   then
+      positionToPlay=6
+   elif ${board[7]} == "8" ]
+   then
+      positionToPlay=8
    fi
 }
 
