@@ -37,7 +37,18 @@ else
 fi
 }
 
-#Calling function to decide who won the toss and select symbol first
+#Function to display the Board
+displayBoard(){
+echo "Board"
+echo "-------------------------"
+echo "${board[0]} ${board[1]} ${board[2]}"
+echo "${board[3]} ${board[4]} ${board[5]}"
+echo "${board[6]} ${board[7]} ${board[8]}"
+echo "-------------------------"
+}
+
+#Calling function
 reset
 toss
 chooseSymbol
+displayBoard
