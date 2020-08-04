@@ -17,16 +17,16 @@ toss(){
    fi
 }
 
-#Function to select symbol, who won the toss
+#Condition to select symbol, who won the toss
 chooseSymbol(){
 if [ ${player[0]} == "player" ]
 then
    read -p "Select any one symbol X or O: " selectLetter
    if [ $selectLetter == "X" ]
    then
-      	symbol=("X" "O")
+      symbol=("X" "O")
    else
-   	symbol=("O" "X")
+      symbol=("O" "X")
    fi
 else
    if [ $flip == 1 ]
@@ -38,7 +38,7 @@ else
 fi
 }
 
-#Functon to display Gameboard
+#Function to display gameboard
 displayBoard(){
 echo "Board"
 echo "-------------------------"
@@ -79,20 +79,91 @@ TicTacToeApp(){
    fi
 }
 
-#Function to make a move by computer
+#Function for computer move with winning position
 superComputer(){
-   while(true)
-   do
-      temp=$(( RANDOM % 9 + 1 ))
-      if [ ${board[ $temp - 1 ]} != "X" ] && [ ${board[ $temp - 1 ]} != "O" ]
-      then
-         positionToPlay=$temp
-      break
-      fi
-   done
+   currentSym=$sym
+   winningOrBlockingMoveForSuperComputer
 }
 
-#Function to start game 
+#Function to check winning position for computer move
+winningOrBlockingMoveForSuperComputer(){
+positionToPlay=-1
+      if [ ${board[0]} == $currentSym ] && [ ${board[1]} == $currentSym ] && [ ${board[2]} == "3" ]
+      then
+               positionToPlay=2
+      elif [ ${board[0]} == $currentSym ] && [ ${board[2]} == $currentSym ] && [ ${board[1]} == "2" ]
+      then
+         positionToPlay=1
+      elif [ ${board[1]} == $currentSym ] && [ ${board[2]} == $currentSym ] && [ ${board[0]} == "1" ]
+      then
+         positionToPlay=0
+      elif [ ${board[3]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[5]} == "6" ]
+      then
+         positionToPlay=5
+      elif [ ${board[3]} == $currentSym ] && [ ${board[5]} == $currentSym ] && [ ${board[4]} == "5" ]
+      then
+         positionToPlay=4
+      elif [ ${board[4]} == $currentSym ] && [ ${board[5]} == $currentSym ] && [ ${board[3]} == "4" ]
+      then
+         positionToPlay=3
+      elif [ ${board[6]} == $currentSym ] && [ ${board[7]} == $currentSym ] && [ ${board[8]} == "9" ]
+      then
+         positionToPlay=8
+      elif [ ${board[6]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[7]} == "8" ]
+      then
+         positionToPlay=7
+      elif [ ${board[7]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[6]} == "7" ]
+      then
+         positionToPlay=6
+      elif [ ${board[0]} == $currentSym ] && [ ${board[3]} == $currentSym ] && [ ${board[6]} == "6" ]
+      then
+         positionToPlay=6
+      elif [ ${board[0]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[3]} == "4" ]
+      then
+         positionToPlay=3
+      elif [ ${board[3]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[0]} == "1" ]
+      then
+         positionToPlay=0
+      elif [ ${board[1]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[7]} == "8" ]
+      then
+         positionToPlay=7
+      elif [ ${board[1]} == $currentSym ] && [ ${board[7]} == $currentSym ] && [ ${board[4]} == "5" ]
+      then
+         positionToPlay=4
+      elif [ ${board[4]} == $currentSym ] && [ ${board[7]} == $currentSym ] && [ ${board[1]} == "2" ]
+      then
+         positionToPlay=1
+      elif [ ${board[2]} == $currentSym ] && [ ${board[5]} == $currentSym ] && [ ${board[8]} == "9" ]
+      then
+         positionToPlay=8
+      elif [ ${board[2]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[5]} == "6" ]
+      then
+         positionToPlay=5
+      elif [ ${board[5]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[2]} == "3" ]
+      then
+         positionToPlay=2
+      elif [ ${board[0]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[8]} == "9" ]
+      then
+         positionToPlay=8
+      elif [ ${board[0]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[4]} == "5" ]
+      then
+         positionToPlay=4
+      elif [ ${board[4]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[0]} == "1" ]
+      then
+         positionToPlay=0
+      elif [ ${board[2]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[6]} == "7" ]
+      then
+         positionToPlay=6
+      elif [ ${board[2]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[4]} == "5" ]
+      then
+         positionToPlay=4
+      elif [ ${board[4]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[2]} == "3" ]
+      then
+         positionToPlay=2
+      fi
+}
+
+#Function to start game
 playMove(){
    playerChange=$playChance
    if [ ${player[$playChance]} == "computer" ]
@@ -106,28 +177,21 @@ playMove(){
       read -p "Please select a postion to play(1-9)" positionToPlay
    fi
 
-	board[ $positionToPlay - 1 ]=$sym
-	TicTacToeApp
-	winner=$gamestatus
-	playChance=$(( $playChance + 1 ))
+board[ $positionToPlay - 1 ]=$sym
+TicTacToeApp
+winner=$gamestatus
+playChance=$(( $playChance + 1 ))
 }
 
-#Initialising the variables
 playChance=0
-
-#Calling Function to Reset Board
 reset
-
-#Calling Toss Function
 toss
-
-#Calling selection of symbol function
 chooseSymbol
 
 for (( noOfTurn=0; noOfTurn < 9 ; noOfTurn++ ))
 do
-#Calling function to start game
    playMove
+
 
    if [ $winner == 1 ]
    then
