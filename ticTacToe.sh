@@ -97,6 +97,10 @@ superComputer(){
       winningOrBlockingMoveForSuperComputer
    fi
 
+   if [ $positionToPlay == -1 ]
+   then
+      playOnCornerBySuperComputer
+   fi
 }
 
 #Function to check winning position for computer move
@@ -104,77 +108,95 @@ winningOrBlockingMoveForSuperComputer(){
 positionToPlay=-1
       if [ ${board[0]} == $currentSym ] && [ ${board[1]} == $currentSym ] && [ ${board[2]} == "3" ]
       then
-               positionToPlay=2
+               positionToPlay=3
       elif [ ${board[0]} == $currentSym ] && [ ${board[2]} == $currentSym ] && [ ${board[1]} == "2" ]
       then
-         positionToPlay=1
+         positionToPlay=2
       elif [ ${board[1]} == $currentSym ] && [ ${board[2]} == $currentSym ] && [ ${board[0]} == "1" ]
       then
-         positionToPlay=0
+         positionToPlay=1
       elif [ ${board[3]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[5]} == "6" ]
       then
-         positionToPlay=5
+         positionToPlay=6
       elif [ ${board[3]} == $currentSym ] && [ ${board[5]} == $currentSym ] && [ ${board[4]} == "5" ]
       then
-         positionToPlay=4
+         positionToPlay=5
       elif [ ${board[4]} == $currentSym ] && [ ${board[5]} == $currentSym ] && [ ${board[3]} == "4" ]
       then
-         positionToPlay=3
+         positionToPlay=4
       elif [ ${board[6]} == $currentSym ] && [ ${board[7]} == $currentSym ] && [ ${board[8]} == "9" ]
       then
-         positionToPlay=8
+         positionToPlay=9
       elif [ ${board[6]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[7]} == "8" ]
       then
-         positionToPlay=7
+         positionToPlay=8
       elif [ ${board[7]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[6]} == "7" ]
       then
-         positionToPlay=6
+         positionToPlay=7
       elif [ ${board[0]} == $currentSym ] && [ ${board[3]} == $currentSym ] && [ ${board[6]} == "6" ]
       then
          positionToPlay=6
       elif [ ${board[0]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[3]} == "4" ]
       then
-         positionToPlay=3
+         positionToPlay=4
       elif [ ${board[3]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[0]} == "1" ]
       then
-         positionToPlay=0
+         positionToPlay=1
       elif [ ${board[1]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[7]} == "8" ]
       then
-         positionToPlay=7
+         positionToPlay=8
       elif [ ${board[1]} == $currentSym ] && [ ${board[7]} == $currentSym ] && [ ${board[4]} == "5" ]
       then
-         positionToPlay=4
+         positionToPlay=5
       elif [ ${board[4]} == $currentSym ] && [ ${board[7]} == $currentSym ] && [ ${board[1]} == "2" ]
       then
-         positionToPlay=1
+         positionToPlay=2
       elif [ ${board[2]} == $currentSym ] && [ ${board[5]} == $currentSym ] && [ ${board[8]} == "9" ]
       then
-         positionToPlay=8
+         positionToPlay=9
       elif [ ${board[2]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[5]} == "6" ]
       then
-         positionToPlay=5
+         positionToPlay=6
       elif [ ${board[5]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[2]} == "3" ]
       then
-         positionToPlay=2
+         positionToPlay=3
       elif [ ${board[0]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[8]} == "9" ]
       then
-         positionToPlay=8
+         positionToPlay=9
       elif [ ${board[0]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[4]} == "5" ]
       then
-         positionToPlay=4
+         positionToPlay=5
       elif [ ${board[4]} == $currentSym ] && [ ${board[8]} == $currentSym ] && [ ${board[0]} == "1" ]
       then
-         positionToPlay=0
+         positionToPlay=1
       elif [ ${board[2]} == $currentSym ] && [ ${board[4]} == $currentSym ] && [ ${board[6]} == "7" ]
       then
-         positionToPlay=6
+         positionToPlay=7
       elif [ ${board[2]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[4]} == "5" ]
       then
-         positionToPlay=4
+         positionToPlay=5
       elif [ ${board[4]} == $currentSym ] && [ ${board[6]} == $currentSym ] && [ ${board[2]} == "3" ]
       then
-         positionToPlay=2
+         positionToPlay=3
       fi
+}
+
+#Function to select Corner position by computer
+playOnCornerBySuperComputer(){
+   positionToPlay=-1
+   if [ ${board[0]} == "1" ]
+   then
+      positionToPlay=1
+   elif [ ${board[2]} == "3" ]
+   then
+      positionToPlay=3
+   elif [ ${board[6]} == "7" ]
+   then
+      positionToPlay=7
+   elif [ ${board[8]} == "9" ]
+   then
+      positionToPlay=9
+   fi
 }
 
 #Function to start game
@@ -221,3 +243,4 @@ do
    fi
 	playChance=$(( $playChance % 2 ))
 done
+
